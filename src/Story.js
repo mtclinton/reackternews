@@ -52,8 +52,7 @@ function Story({ story: { id, by, title, kids, time, url, score },rank}) {
                 </span>
             </div>
             <div>
-                <span colSpan="2"></span>
-                <span className="subtext">
+                <span className="subtext" style={{paddingLeft:"20px"}}>
                     <span className="score" id="score_27089576">{score} points</span> by <a href={`https://news.ycombinator.com/user?id=${by}`} className="hnuser">{by} </a>
                     <span className="age"><a href={`https://news.ycombinator.com/item?id=${id}`}>
                          {timeAgo.format(new Date(time * 1000))}
