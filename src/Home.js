@@ -63,23 +63,22 @@ function Home() {
 
 
     return (
-        <div>
-            <Header />
-            <div className="Home">
-                Home
-            </div>
-            {isLoading ? (
-                <p className="loading">Loading...</p>
-            ) : (
-                <div>
-                    {stories.map(( story ) => (
-                        <Story key={story.id} story={story} />
-                    ))}
-                </div>
-            )}
-            <Footer />
+        <center>
+            <div id="hnmain" className={"table"} style={{border:"0", cellpadding:"0", cellspacing:"0", width:"85%", backgroundColor:"#f6f6ef"}}>
+                <Header />
+                {isLoading ? (
+                    <p className="loading">Loading...</p>
+                ) : (
+                    <div className={"table"}>
+                        {stories.map(( story,index ) => (
+                            <Story key={story.id} story={story} rank={index+1}/>
+                        ))}
+                    </div>
+                )}
+                <Footer />
 
-        </div>
+            </div>
+        </center>
     );
 }
 
