@@ -9,7 +9,7 @@ function Header() {
                         <a href={"https://news.ycombinator.com"}>
                             <img
                                 src={"https://news.ycombinator.com/y18.gif"}
-                                style={{width: "18px", height: "18px",border: "1px white solic"}} />
+                                style={{width: "18px", height: "18px",border: "1px white solid"}} />
                         </a>
 
                     </span>

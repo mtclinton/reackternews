@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Header from "./Header";
 import Story from "./Story";
+import Footer from "./Footer";
 
 function Home() {
 
@@ -76,6 +77,7 @@ function Home() {
                     ))}
                 </div>
             )}
+            <Footer />
 
         </div>
     );
