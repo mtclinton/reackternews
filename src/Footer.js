@@ -6,13 +6,11 @@ function Footer() {
             <div>
                 <span>
                     <img src="https://news.ycombinator.com/s.gif" height="10" width="0" />
-                        <table width="100%" cellSpacing="0" cellPadding="1">
-                            <tbody>
-                            <tr>
+                        <div width="100%" cellSpacing="0" cellPadding="1">
+                            <div>
                                 <span style={{backgroundColor: "#ff6600"}}></span>
-                            </tr>
-                            </tbody>
-                        </table>
+                            </div>
+                        </div>
                         <br />
                         <center>
                             <span className="yclinks">
@@ -26,10 +24,10 @@ function Footer() {
                                 <a href="mailto:hn@ycombinator.com">Contact</a>
                             </span>
                             <br /><br />
-                            <form method="get" action="//hn.algolia.com/">Search:
+{/*                            <form method="get" action="//hn.algolia.com/">Search:
                                 <input type="text" name="q" value="" size="17" autoCorrect="off" spellCheck="false"
                                        autoCapitalize="off" autoComplete="false" />
-                            </form>
+                            </form>*/}
                         </center>
                 </span>
             </div>
