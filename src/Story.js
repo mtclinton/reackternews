@@ -26,6 +26,39 @@ function extractHostname(url) {
     return hostname;
 }
 
+function ShowUrl(props) {
+    console.log(props.url)
+    if(  typeof props.url === 'undefined' ){
+        return (
+            <span>
+                <a
+                    href={`https://news.ycombinator.com/item?id=${props.id}`}
+                    className="storylink">
+                    {props.title}
+                </a>
+            </span>
+        );
+    } else {
+        console.log('rendering link')
+
+        return (
+            <span>
+                <a
+                    href={props.url}
+                    className="storylink">
+                    {props.title}
+                </a>
+                <span className="sitebit comhead"> (
+                    <a href={`from?site=${psl.get(extractHostname(props.url))}`}>
+                        <span className="sitestr">{psl.get(extractHostname(props.url))}</span>
+                    </a>)
+                </span>
+            </span>
+        );
+    }
+
+}
+
 function Story({ story: { id, by, title, kids, time, url, score },rank}) {
     return (
         <div className="story">
@@ -39,16 +72,9 @@ function Story({ story: { id, by, title, kids, time, url, score },rank}) {
                 {/*    </center>*/}
                 {/*</span>*/}
                 <span className="title">
-                    <a
-                    href={url}
-                    className="storylink">
-                        {title}
-                    </a>
-                    <span className="sitebit comhead"> (
-                        <a href={`from?site=${psl.get(extractHostname(url))}`}>
-                            <span className="sitestr">{psl.get(extractHostname(url))}</span>
-                        </a>)
-                    </span>
+
+                    <ShowUrl title={title} url={url} id={id}/>
+
                 </span>
             </div>
             <div>

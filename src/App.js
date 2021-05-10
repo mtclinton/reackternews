@@ -1,10 +1,10 @@
 import React from 'react';
 import Home from "./Home";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
-      <Home />
+      <Home type={props.type}/>
     </div>
   );
 }

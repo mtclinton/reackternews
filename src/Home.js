@@ -3,7 +3,7 @@ import Header from "./Header";
 import Story from "./Story";
 import Footer from "./Footer";
 
-function Home() {
+function Home(props) {
 
     const BASE_API_URL = 'https://hacker-news.firebaseio.com/v0';
 
@@ -51,7 +51,7 @@ function Home() {
 
     useEffect(() => {
         setIsLoading(true);
-        getStories('top')
+        getStories(props.type)
             .then((stories) => {
                 setStories(stories);
                 setIsLoading(false);

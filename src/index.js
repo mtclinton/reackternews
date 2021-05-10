@@ -13,14 +13,26 @@ ReactDOM.render(
     <Router>
 
         <Switch>
-            <Route path="/about">
-                <App />
+            <Route path="/ask">
+                <App type={"ask"}/>
             </Route>
-            <Route path="/topics">
-                <App />
+            <Route path="/show">
+                <App type={"show"}/>
+            </Route>
+            <Route path="/jobs">
+                <App type={"job"}/>
+            </Route>
+            <Route path="/newest">
+                <App type={"new"}/>
+            </Route>
+            <Route path="/best">
+                <App type={"best"}/>
+            </Route>
+            <Route path="/news">
+                <App type={"top"}/>
             </Route>
             <Route path="/">
-                <App />
+                <App type={"top"}/>
             </Route>
         </Switch>
     </Router>

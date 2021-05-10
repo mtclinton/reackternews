@@ -6,7 +6,7 @@ function Header() {
             <div style={{background: "#ff6600"}}>
                 <div className={"table"} style={{border:"0", cellpadding:"0", cellspacing:"0", width:"100%", padding: "2px", verticalAlign: "middle", display:"flex", flexDirection: "row"}}>
                     <span style={{width: "18px", paddingRight: "4px", verticalAlign: "middle"}}>
-                        <a href={"https://news.ycombinator.com"}>
+                        <a href={"/"}>
                             <img
                                 src={"https://news.ycombinator.com/y18.gif"}
                                 style={{width: "18px", height: "18px",border: "1px white solid", verticalAlign: "middle"}} />
