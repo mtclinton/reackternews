@@ -3,6 +3,10 @@ import Header from "./Header";
 import Story from "./Story";
 import Footer from "./Footer";
 
+import {
+    useParams
+} from "react-router-dom";
+
 function Home(props) {
 
     const BASE_API_URL = 'https://hacker-news.firebaseio.com/v0';
@@ -32,14 +36,43 @@ function Home(props) {
             // const { data: storyIds } = await fetch(
             //     `${BASE_API_URL}/${type}stories.json`
             // );
+
             const response = await fetch(`${BASE_API_URL}/${type}stories.json`)
             const storyIds = await response.json()
+            console.log(typeof props.page)
+            const parsed = parseInt(props.page, 10);
+            console.log(typeof parsed)
 
-            const stories = await Promise.all(
-                storyIds.slice(0, 30).map((storyId) =>getStory(storyId))
-            );
-            console.log(stories)
-            return stories
+            if(typeof props.page === "undefined") {
+                const stories = await Promise.all(
+                    storyIds.slice(0, 30).map((storyId) =>getStory(storyId))
+                );
+                return stories
+
+            } else if (!isNaN(parsed)) {
+                console.log(parsed)
+
+                if(parsed > storyIds.length) {
+                    console.log("out of range pagination")
+                } else if ((parsed*30) > storyIds.length) {
+                    const stories = await Promise.all(
+                        storyIds.slice(parsed*30, storyIds.length).map((storyId) =>getStory(storyId))
+                    );
+                    return stories
+
+                } else {
+                    const stories = await Promise.all(
+                        storyIds.slice(parsed*30-30, parsed*30).map((storyId) =>getStory(storyId))
+                    );
+                    return stories
+                }
+
+            } else {
+                console.log('url page error')
+
+            }
+
+
         } catch (error) {
             console.log('Error while getting list of stories.');
 
@@ -69,7 +102,9 @@ function Home(props) {
                 {isLoading ? (
                     <p className="loading">Loading...</p>
                 ) : (
+
                     <div className={"table"}>
+                        <span>Page number:  {props.page}</span>
                         {stories.map(( story,index ) => (
                             <Story key={story.id} story={story} rank={index+1}/>
                         ))}

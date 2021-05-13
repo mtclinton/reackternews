@@ -13,39 +13,39 @@ ReactDOM.render(
     <Router>
 
         <Switch>
-            <Route path="/ask/:page">
-                <App type={"ask"}/>
-            </Route>
+            <Route path="/ask/:page" component={(props) => (
+                <App type={"ask"} {...props} />
+            )}/>
             <Route path="/ask">
                 <App type={"ask"}/>
             </Route>
-            <Route path="/show/:page">
-                <App type={"show"}/>
-            </Route>
+            <Route path="/show/:page" component={(props) => (
+                <App type={"show"} {...props} />
+            )}/>
             <Route path="/show">
                 <App type={"show"}/>
             </Route>
-            <Route path="/jobs/:page">
-                <App type={"job"}/>
-            </Route>
+            <Route path="/jobs/:page" component={(props) => (
+                <App type={"jobs"} {...props} />
+            )}/>
             <Route path="/jobs">
                 <App type={"job"}/>
             </Route>
-            <Route path="/newest/:page">
-                <App type={"new"}/>
-            </Route>
-            <Route path="/newest">
-                <App type={"new"}/>
-            </Route>
-            <Route path="/best/:page">
-                <App type={"best"}/>
-            </Route>
+            <Route path="/newest/:page" component={(props) => (
+                <App type={"new"} {...props} />
+            )}/>
+            <Route path="/newest" component={(props) => (
+                <App type={"new"} {...props} />
+            )}/>
+            <Route path="/best/:page" component={(props) => (
+                <App type={"best"} {...props} />
+            )}/>
             <Route path="/best">
                 <App type={"best"}/>
             </Route>
-            <Route path="/news/:page">
-                <App type={"top"}/>
-            </Route>
+            <Route path="/news/:page" component={(props) => (
+                <App type={"top"} {...props} />
+            )}/>
             <Route path="/news">
                 <App type={"top"}/>
             </Route>

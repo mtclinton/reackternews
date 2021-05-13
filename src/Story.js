@@ -27,7 +27,7 @@ function extractHostname(url) {
 }
 
 function ShowUrl(props) {
-    console.log(props.url)
+    // console.log(props.url)
     if(  typeof props.url === 'undefined' ){
         return (
             <span>
@@ -39,7 +39,7 @@ function ShowUrl(props) {
             </span>
         );
     } else {
-        console.log('rendering link')
+        // console.log('rendering link')
 
         return (
             <span>
