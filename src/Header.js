@@ -15,7 +15,7 @@ function Header() {
                     </span>
                     <span>
                         <span className="pagetop" style={{lineHeight: "12px", height: "10px", verticalAlign: "middle"}}>
-                            <b className="hnname"><a href="news"> Hacker News </a></b><a href="newest">new</a> | <a href="/best">best</a> | <a href="newcomments">comments</a> | <a href="ask">ask</a> | <a href="show">show</a> | <a href="jobs">jobs</a> | <a href="submit">submit</a>
+                            <b className="hnname"><a href="/news"> Hacker News </a></b><a href="/newest">new</a> | <a href="/best">best</a> | <a href="/newcomments">comments</a> | <a href="/ask">ask</a> | <a href="/show">show</a> | <a href="/jobs">jobs</a> | <a href="submit">submit</a>
                         </span>
 
                     </span>

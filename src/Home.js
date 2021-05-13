@@ -7,7 +7,27 @@ import {
     useParams
 } from "react-router-dom";
 
+function More(props) {
+    if(props.nextPage){
+        return (
+            <div>
+                            <span className="subtext" style={{paddingLeft:"20px"}}>
+                                <span className="title"><a href={`${props.nextPage}`} className="morelink" rel="next">More</a></span>
+
+                            </span>
+
+            </div>
+        ) ;
+    } else {
+        return (
+            <span></span>
+        );
+    }
+}
+
 function Home(props) {
+
+    const [nextPage, setNextPage] = useState(1);
 
     const BASE_API_URL = 'https://hacker-news.firebaseio.com/v0';
 
@@ -39,18 +59,20 @@ function Home(props) {
 
             const response = await fetch(`${BASE_API_URL}/${type}stories.json`)
             const storyIds = await response.json()
-            console.log(typeof props.page)
+            console.log(storyIds.length)
             const parsed = parseInt(props.page, 10);
-            console.log(typeof parsed)
+            // console.log(typeof parsed)
 
             if(typeof props.page === "undefined") {
                 const stories = await Promise.all(
                     storyIds.slice(0, 30).map((storyId) =>getStory(storyId))
                 );
+                setNextPage(2);
+
                 return stories
 
             } else if (!isNaN(parsed)) {
-                console.log(parsed)
+                // console.log(parsed)
 
                 if(parsed > storyIds.length) {
                     console.log("out of range pagination")
@@ -58,12 +80,15 @@ function Home(props) {
                     const stories = await Promise.all(
                         storyIds.slice(parsed*30, storyIds.length).map((storyId) =>getStory(storyId))
                     );
+                    setNextPage(0);
+
                     return stories
 
                 } else {
                     const stories = await Promise.all(
                         storyIds.slice(parsed*30-30, parsed*30).map((storyId) =>getStory(storyId))
                     );
+                    setNextPage(parsed+1);
                     return stories
                 }
 
@@ -104,10 +129,11 @@ function Home(props) {
                 ) : (
 
                     <div className={"table"}>
-                        <span>Page number:  {props.page}</span>
                         {stories.map(( story,index ) => (
-                            <Story key={story.id} story={story} rank={index+1}/>
+                            <Story key={story.id} story={story} rank={((nextPage-2)*30)+index+1}/>
                         ))}
+                        <More nextPage={nextPage} type ={props.type}/>
+
                     </div>
                 )}
                 <Footer />
