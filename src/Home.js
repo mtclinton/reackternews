@@ -12,7 +12,7 @@ function More(props) {
         return (
             <div>
                             <span className="subtext" style={{paddingLeft:"20px"}}>
-                                <span className="title"><a href={`${props.nextPage}`} className="morelink" rel="next">More</a></span>
+                                <span className="title"><a href={`/${props.url}/${props.nextPage}`} className="morelink" rel="next">More</a></span>
 
                             </span>
 
@@ -26,6 +26,9 @@ function More(props) {
 }
 
 function Home(props) {
+    console.log(props)
+    const page = props.page || 1;
+
 
     const [nextPage, setNextPage] = useState(1);
     const [more, setMore] = useState(true);
@@ -52,44 +55,54 @@ function Home(props) {
         }
     };
 
-    const getStories = async (type) => {
+    const getStories = async (type, page) => {
+        console.log("calling getstoreis")
+
         try {
             // const { data: storyIds } = await fetch(
             //     `${BASE_API_URL}/${type}stories.json`
             // );
-            console.log('getting stories')
+            console.log('getting stories',page )
             const response = await fetch(`${BASE_API_URL}/${type}stories.json`)
             const storyIds = await response.json()
-            // console.log(typeof parsed)
+            console.log("page number is: ",page, 'type: ',typeof page)
+            const pageInt = parseInt(page)
+            console.log("page Int number is: ",pageInt, 'type: ',typeof pageInt, ' number: ')
 
-            if(props.page === 0) {
+            if(pageInt === 1) {
+                console.log("calling frong page ",pageInt )
+
                 const stories = await Promise.all(
                     storyIds.slice(0, 30).map((storyId) =>getStory(storyId))
                 );
+                // this.props.page = 0;
                 setNextPage(2);
+                console.log(stories )
 
                 return stories
 
-            } else if (!isNaN(props.page )) {
+            } else if (Number.isInteger(pageInt )) {
                 // console.log(parsed)
 
-                if(props.page  > storyIds.length) {
+                if(pageInt  > storyIds.length) {
                     console.log("out of range pagination")
-                } else if ((props.page *30) > storyIds.length) {
+                } else if ((pageInt *30) > storyIds.length) {
 
                     const stories = await Promise.all(
-                        storyIds.slice((props.page -1)*30, storyIds.length).map((storyId) =>getStory(storyId))
+                        storyIds.slice((pageInt -1)*30, storyIds.length).map((storyId) =>getStory(storyId))
                     );
                     setMore(false);
-                    setNextPage(props.page +1);
+                    setNextPage(pageInt +1);
                     return stories
 
                 } else {
                     const stories = await Promise.all(
-                        storyIds.slice(props.page *30-30, props.page *30).map((storyId) =>getStory(storyId))
+                        storyIds.slice(pageInt *30-30, pageInt *30).map((storyId) =>getStory(storyId))
                     );
-                    setNextPage(props.page +1);
+                    console.log(stories)
+                    setNextPage(pageInt +1);
                     return stories
+
                 }
 
             } else {
@@ -109,7 +122,8 @@ function Home(props) {
 
     useEffect(() => {
         setIsLoading(true);
-        getStories(props.type)
+        console.log('useeffect ',page)
+        getStories(props.type, page)
             .then((stories) => {
                 setStories(stories);
                 setIsLoading(false);
@@ -117,7 +131,7 @@ function Home(props) {
             .catch(() => {
                 setIsLoading(false);
             });
-    }, []);
+    }, [page]);
 
 
     return (
@@ -130,9 +144,9 @@ function Home(props) {
 
                     <div className={"table"}>
                         {stories.map(( story,index ) => (
-                            <Story key={story.id} story={story} rank={((nextPage-2)*30)+index+1}/>
+                            <Story key={story.id} story={story} rank={((page-1)*30)+index+1}/>
                         ))}
-                        <More nextPage={nextPage} type ={props.type} more ={more}/>
+                        <More nextPage={nextPage} url ={props.url} more ={more}/>
 
                     </div>
                 )}
