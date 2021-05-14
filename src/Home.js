@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 function More(props) {
-    if(props.nextPage){
+    if(props.more){
         return (
             <div>
                             <span className="subtext" style={{paddingLeft:"20px"}}>
@@ -28,6 +28,7 @@ function More(props) {
 function Home(props) {
 
     const [nextPage, setNextPage] = useState(1);
+    const [more, setMore] = useState(true);
 
     const BASE_API_URL = 'https://hacker-news.firebaseio.com/v0';
 
@@ -56,14 +57,12 @@ function Home(props) {
             // const { data: storyIds } = await fetch(
             //     `${BASE_API_URL}/${type}stories.json`
             // );
-
+            console.log('getting stories')
             const response = await fetch(`${BASE_API_URL}/${type}stories.json`)
             const storyIds = await response.json()
-            console.log(storyIds.length)
-            const parsed = parseInt(props.page, 10);
             // console.log(typeof parsed)
 
-            if(typeof props.page === "undefined") {
+            if(props.page === 0) {
                 const stories = await Promise.all(
                     storyIds.slice(0, 30).map((storyId) =>getStory(storyId))
                 );
@@ -71,24 +70,25 @@ function Home(props) {
 
                 return stories
 
-            } else if (!isNaN(parsed)) {
+            } else if (!isNaN(props.page )) {
                 // console.log(parsed)
 
-                if(parsed > storyIds.length) {
+                if(props.page  > storyIds.length) {
                     console.log("out of range pagination")
-                } else if ((parsed*30) > storyIds.length) {
-                    const stories = await Promise.all(
-                        storyIds.slice(parsed*30, storyIds.length).map((storyId) =>getStory(storyId))
-                    );
-                    setNextPage(0);
+                } else if ((props.page *30) > storyIds.length) {
 
+                    const stories = await Promise.all(
+                        storyIds.slice((props.page -1)*30, storyIds.length).map((storyId) =>getStory(storyId))
+                    );
+                    setMore(false);
+                    setNextPage(props.page +1);
                     return stories
 
                 } else {
                     const stories = await Promise.all(
-                        storyIds.slice(parsed*30-30, parsed*30).map((storyId) =>getStory(storyId))
+                        storyIds.slice(props.page *30-30, props.page *30).map((storyId) =>getStory(storyId))
                     );
-                    setNextPage(parsed+1);
+                    setNextPage(props.page +1);
                     return stories
                 }
 
@@ -132,7 +132,7 @@ function Home(props) {
                         {stories.map(( story,index ) => (
                             <Story key={story.id} story={story} rank={((nextPage-2)*30)+index+1}/>
                         ))}
-                        <More nextPage={nextPage} type ={props.type}/>
+                        <More nextPage={nextPage} type ={props.type} more ={more}/>
 
                     </div>
                 )}

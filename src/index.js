@@ -16,21 +16,21 @@ ReactDOM.render(
             <Route path="/ask/:page" component={(props) => (
                 <App type={"ask"} {...props} />
             )}/>
-            <Route path="/ask">
-                <App type={"ask"}/>
-            </Route>
+            <Route path="/ask" component={(props) => (
+                <App type={"ask"} {...props} />
+            )}/>
             <Route path="/show/:page" component={(props) => (
                 <App type={"show"} {...props} />
             )}/>
-            <Route path="/show">
-                <App type={"show"}/>
-            </Route>
+            <Route path="/show" component={(props) => (
+                <App type={"show"} {...props} />
+            )}/>
             <Route path="/jobs/:page" component={(props) => (
                 <App type={"jobs"} {...props} />
             )}/>
-            <Route path="/jobs">
-                <App type={"job"}/>
-            </Route>
+            <Route path="/jobs" component={(props) => (
+                <App type={"jobs"} {...props} />
+            )}/>
             <Route path="/newest/:page" component={(props) => (
                 <App type={"new"} {...props} />
             )}/>
@@ -40,18 +40,18 @@ ReactDOM.render(
             <Route path="/best/:page" component={(props) => (
                 <App type={"best"} {...props} />
             )}/>
-            <Route path="/best">
-                <App type={"best"}/>
-            </Route>
+            <Route path="/best" component={(props) => (
+                <App type={"best"} {...props} />
+            )}/>
             <Route path="/news/:page" component={(props) => (
                 <App type={"top"} {...props} />
             )}/>
-            <Route path="/news">
-                <App type={"top"}/>
-            </Route>
-            <Route path="/">
-                <App type={"top"}/>
-            </Route>
+            <Route path="/news" component={(props) => (
+                <App type={"top"} {...props} />
+            )}/>
+            <Route path="/" component={(props) => (
+                <App type={"top"} {...props} />
+            )}/>
         </Switch>
     </Router>
   </React.StrictMode>,
