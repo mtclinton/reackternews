@@ -6,52 +6,58 @@ import {
     Route,
 
 } from "react-router-dom";
-import App from './App';
+
+import history from './history';
+
+import Ask from './pages/Ask';
+import Show from './pages/Show';
+import Jobs from './pages/Jobs';
+import Newest from './pages/Newest';
+import Best from './pages/Best';
+import News from './pages/News';
+
+function NotFound() {
+    return (
+        <div>
+            <h1>That page was not found</h1>
+        </div>
+    );
+}
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-
         <Switch>
-            <Route path="/ask/:page" component={(props) => (
-                <App type={"ask"} url={"ask"} {...props} />
-            )}/>
-            <Route path="/ask" component={(props) => (
-                <App type={"ask"} url={"ask"} {...props} />
-            )}/>
-            <Route path="/show/:page" component={(props) => (
-                <App type={"show"} url={"show"} {...props} />
-            )}/>
-            <Route path="/show" component={(props) => (
-                <App type={"show"} url={"show"} {...props} />
-            )}/>
-            <Route path="/jobs/:page" component={(props) => (
-                <App type={"jobs"} url={"jobs"} {...props} />
-            )}/>
-            <Route path="/jobs" component={(props) => (
-                <App type={"jobs"} url={"jobs"} {...props} />
-            )}/>
-            <Route path="/newest/:page" component={(props) => (
-                <App type={"new"} url={"newest"} {...props} />
-            )}/>
-            <Route path="/newest" component={(props) => (
-                <App type={"new"} url={"newest"} {...props} />
-            )}/>
-            <Route path="/best/:page" component={(props) => (
-                <App type={"best"} url={"best"} {...props} />
-            )}/>
-            <Route path="/best" component={(props) => (
-                <App type={"best"} url={"best"} {...props} />
-            )}/>
-            <Route path="/news/:page" component={(props) => (
-                <App type={"top"} url={"news"} {...props} />
-            )}/>
-            <Route path="/news" component={(props) => (
-                <App type={"top"} url={"news"} {...props} />
-            )}/>
-            <Route path="/" component={(props) => (
-                <App type={"top"} url={"news"} {...props} />
-            )}/>
+            <Route
+                path="/ask/:page(\d+)?"
+                component={Ask}
+            />
+            <Route
+                path="/show/:page(\d+)?"
+                component={Show}
+            />
+            <Route
+                path="/jobs/:page(\d+)?"
+                component={Jobs}
+            />
+            <Route
+                path="/newest/:page(\d+)?"
+                component={Newest}
+            />
+            <Route
+                path="/best/:page(\d+)?"
+                component={Best}
+            />
+            <Route
+                path="/news/:page(\d+)?"
+                component={News}
+            />
+            <Route
+                exact
+                path="/"
+                component={News}
+            />
+            <Route path="" component={NotFound} />
         </Switch>
     </Router>
   </React.StrictMode>,
