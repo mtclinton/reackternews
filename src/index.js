@@ -15,6 +15,7 @@ import Jobs from './pages/Jobs';
 import Newest from './pages/Newest';
 import Best from './pages/Best';
 import News from './pages/News';
+import Newcomments from "./pages/Newcomments";
 
 function NotFound() {
     return (
@@ -35,6 +36,10 @@ ReactDOM.render(
             <Route
                 path="/show/:page(\d+)?"
                 component={Show}
+            />
+            <Route
+                path="/newcomments/:page(\d+)?"
+                component={Newcomments}
             />
             <Route
                 path="/jobs/:page(\d+)?"

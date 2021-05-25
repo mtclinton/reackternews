@@ -6,9 +6,18 @@ const getStories = async (
     pageNumber,
 )  => {
     try {
-        const response = await fetch(`${BASE_API_URL}/${type}stories.json`);
+        let response;
+        let json
 
-        const json = await response.json();
+        if(type === 'updates'){
+            response = await fetch(`${BASE_API_URL}/${type}.json`);
+            json = await response.json();
+            json = json.items;
+        } else{
+            response = await fetch(`${BASE_API_URL}/${type}stories.json`);
+            json = await response.json();
+        }
+
         const storyIds = json.slice((pageNumber - 1) * 30, (pageNumber) * 30);
 
         const stories = [];

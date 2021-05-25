@@ -6,8 +6,41 @@ import ItemUrl from './ItemUrl';
 // Create formatter (English).
 const timeAgo = new TimeAgo('en-US');
 
+function Comment(props) {
+    const { item, rank } = props;
 
-function Item(props) {
+    return (
+        <div className="comment">
+
+            <div className="athing" id={item.id.toString()}>
+                <span className="default">
+                    <div style={{marginTop: "2px",marginBottom: "10px"}}>
+                        <span className="comhead">
+                                      <a href={`https://news.ycombinator.com/user?id=${item.by}`} className="hnuser">{item.by}</a>
+                            <span className="age">
+                                <a href="item?id=27271350">{timeAgo.format(new Date(item.time * 1000))}</a>
+                            </span>
+                            <span className="par"> | <a href="{`https://news.ycombinator.com/item?id=${item.id}`}">parent</a></span>
+                            {/*<span className="storyon"> | on: <a href="item?id=27261399">A Japanese company cut 80% of the time needed to m...</a></span>*/}
+                        </span>
+                    </div>
+                    <br />
+                    <div className="comment">
+                      <span className="commtext c00">
+                          {item.text}
+                      </span>
+                    </div>
+                </span>
+
+            </div>
+
+            <div className="spacer" style={{ height: '5px' }} />
+        </div>
+
+    );
+}
+
+function Story(props) {
     const { item, rank } = props;
 
     return (
@@ -60,6 +93,25 @@ function Item(props) {
             <div className="spacer" style={{ height: '5px' }} />
         </div>
     );
+}
+
+
+function Item(props) {
+    const { item, rank } = props;
+
+    if(item.type === "comment") {
+        return (
+            <Comment item={item} rank={rank}/>
+
+        )
+    } else {
+        return (
+            <Story item={item} rank={rank} />
+
+        )
+    }
+
+
 }
 
 export default Item;
