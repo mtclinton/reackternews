@@ -19,11 +19,11 @@ function Header() {
                         </span>
 
                     </span>
-                    <span style={{marginLeft: "auto",paddingRight:"4px", verticalAlign: "middle"}}>
-                        <span className="pagetop" style={{paddingRight:"4px", verticalAlign: "middle"}}>
-                              <a href="login?goto=news">login</a>
-                          </span>
-                    </span>
+                    {/*<span style={{marginLeft: "auto",paddingRight:"4px", verticalAlign: "middle"}}>*/}
+                    {/*    <span className="pagetop" style={{paddingRight:"4px", verticalAlign: "middle"}}>*/}
+                    {/*          <a href="login?goto=news">login</a>*/}
+                    {/*      </span>*/}
+                    {/*</span>*/}
 
                 </div>
 

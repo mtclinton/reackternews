@@ -29,27 +29,31 @@ function Container(props) {
 
     return (
         <>
-            <Header />
-            {
-                loading && <div>Loading</div>
-            }
-            {
-                !loading
-                && items.map(
-                    (item, i) => (
-                        <Item
-                            key={item.id}
-                            item={item}
-                            rank={(i + 1) + ((page - 1) * 30)}
-                        />
-                    ),
-                )
-            }
-            {
-                items.length > 0
-                && <Link to={`/${url}/${page + 1}`}>More</Link>
-            }
-            <Footer />
+            <center>
+                <div id="hnmain" className={"table"} style={{border:"0", cellpadding:"0", cellspacing:"0", width:"85%", backgroundColor:"#f6f6ef"}}>
+                    <Header />
+                    {
+                        loading && <div>Loading</div>
+                    }
+                    {
+                        !loading
+                        && items.map(
+                            (item, i) => (
+                                <Item
+                                    key={item.id}
+                                    item={item}
+                                    rank={(i + 1) + ((page - 1) * 30)}
+                                />
+                            ),
+                        )
+                    }
+                    {
+                        items.length > 0
+                        && <Link to={`/${url}/${page + 1}`}>More</Link>
+                    }
+                    <Footer />
+                </div>
+            </center>
         </>
     );
 }
