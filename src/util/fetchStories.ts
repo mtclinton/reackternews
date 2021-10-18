@@ -1,10 +1,11 @@
 import { BASE_API_URL } from '../constants';
 
+import { IItem, PageType } from "../types";
 
 const getStories = async (
-    type,
-    pageNumber,
-)  => {
+    type: PageType,
+    pageNumber: number,
+) : Promise<IItem[]> => {
     try {
         let response;
         let json
@@ -20,10 +21,10 @@ const getStories = async (
 
         const storyIds = json.slice((pageNumber - 1) * 30, (pageNumber) * 30);
 
-        const stories = [];
+        const stories: IItem[] = [];
 
         await Promise.all(
-            storyIds.map(async (id) => {
+            storyIds.map(async (id: string) => {
                 try {
                     const data = await fetch(`${BASE_API_URL}/item/${id}.json`);
                     const story = await data.json();

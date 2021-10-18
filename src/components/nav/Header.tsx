@@ -4,7 +4,7 @@ function Header() {
     return (
         <div className="Header">
             <div style={{background: "#ff6600"}}>
-                <div className={"table"} style={{border:"0", cellpadding:"0", cellspacing:"0", width:"100%", padding: "2px", verticalAlign: "middle", display:"flex", flexDirection: "row"}}>
+                <div className={"table"} style={{border:"0", width:"100%", padding: "2px", verticalAlign: "middle", display:"flex", flexDirection: "row"}}>
                     <span style={{width: "18px", paddingRight: "4px", verticalAlign: "middle"}}>
                         <a href={"/"}>
                             <img

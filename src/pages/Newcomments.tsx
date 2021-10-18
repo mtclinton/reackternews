@@ -5,8 +5,14 @@ import Container from '../components/Container';
 
 import getPageNumber from '../util/pageNumber';
 
+interface RouteInfo {
+    page?: string,
+}
 
-function Newcomments(props) {
+interface IProps extends RouteComponentProps<RouteInfo> {
+}
+
+function Newcomments(props: IProps): JSX.Element {
     const { match } = props;
 
     return (

@@ -1,71 +1,51 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     context: __dirname,
-    entry: './src/index.js',
+    entry: './src/index.tsx',
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    },
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.tsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-                options: {
-                    presets: ["@babel/preset-react"]
-                }
-            },
-            {
-                test: /\.css$/,
-                exclude: /node_modules/,
-                use: [
-                    { loader: MiniCssExtractPlugin.loader },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                localIdentName: '[name]__[local]___[hash:base64:5]',
-                            }
-                        },
-                    },
-                ],
+                loader: 'ts-loader',
             },
             {
                 test: /\.svg$/,
                 use: ['@svgr/webpack'],
                 exclude: /node_modules/,
             },
-        ]
+        ],
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[fullhash].bundle.js',
-        publicPath: "/"
+        publicPath: '/',
     },
     devServer: {
         historyApiFallback: true,
         contentBase: path.join(__dirname, 'dist'),
-        publicPath: "/",
+        publicPath: '/',
         hot: true,
         port: 3000,
     },
+    devtool: 'source-map',
     plugins: [
         new HtmlWebPackPlugin({
-            template: path.resolve(__dirname, "public/index.html"),
-            filename: "index.html",
-            favicon: path.resolve(__dirname, "public/favicon.ico")
-        }),
-        new MiniCssExtractPlugin({
-            filename: "[hash].css",
-            chunkFilename: "[id]--[hash].css",
-            ignoreOrder: false
+            template: path.resolve(__dirname, 'public/index.html'),
+            filename: 'index.html',
+            favicon: path.resolve(__dirname, 'public/favicon.ico'),
         }),
         new CopyPlugin({
             patterns: [
-                { from: "public/css/style.css", to: "css" },
+                { from: 'public/css/style.css', to: 'css' },
             ],
         }),
     ],
-    target: 'web'
+    target: 'web',
 };

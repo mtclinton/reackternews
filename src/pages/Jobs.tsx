@@ -5,8 +5,14 @@ import Container from '../components/Container';
 
 import getPageNumber from '../util/pageNumber';
 
+interface RouteInfo {
+    page?: string,
+}
 
-function Show(props) {
+interface IProps extends RouteComponentProps<RouteInfo> {
+}
+
+function Jobs(props: IProps): JSX.Element {
     const { match } = props;
 
     return (
@@ -14,4 +20,4 @@ function Show(props) {
     );
 }
 
-export default Show;
+export default Jobs;

@@ -5,7 +5,14 @@ import Container from '../components/Container';
 
 import getPageNumber from '../util/pageNumber';
 
-function Best(props) {
+interface RouteInfo {
+    page?: string,
+}
+
+interface IProps extends RouteComponentProps<RouteInfo> {
+}
+
+function Best(props: IProps): JSX.Element {
     const { match } = props;
 
     return (

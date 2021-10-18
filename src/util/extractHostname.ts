@@ -1,4 +1,4 @@
-function extractHostname(url) {
+function extractHostname(url: string): string {
     const { hostname } = new URL(url);
     return hostname;
 }

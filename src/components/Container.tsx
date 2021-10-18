@@ -5,14 +5,21 @@ import Item from './item/Item';
 import Footer from './nav/Footer';
 import Header from './nav/Header';
 
+import { IItem, PageType } from '../types';
+
 import fetchStories from '../util/fetchStories';
 
+interface IProps {
+    type: PageType,
+    url: string,
+    page: number,
+}
 
-function Container(props) {
+function Container(props: IProps) {
     const { url, type, page } = props;
 
-    const [loading, setLoading] = useState(true);
-    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [items, setItems] = useState<IItem[]>([]);
 
     useEffect(() => {
         setLoading(true);
@@ -29,8 +36,8 @@ function Container(props) {
 
     return (
         <>
-            <center>
-                <div id="hnmain" className={"table"} style={{border:"0", cellpadding:"0", cellspacing:"0", width:"85%", backgroundColor:"#f6f6ef"}}>
+            <div>
+                <div id="hnmain" className={"table"} style={{border:"0", width:"85%", backgroundColor:"#f6f6ef"}}>
                     <Header />
                     {
                         loading && <div>Loading</div>
@@ -53,7 +60,7 @@ function Container(props) {
                     }
                     <Footer />
                 </div>
-            </center>
+            </div>
         </>
     );
 }

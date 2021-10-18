@@ -3,10 +3,17 @@ import TimeAgo from 'javascript-time-ago';
 
 import ItemUrl from './ItemUrl';
 
+import { IItem } from '../../types';
+
 // Create formatter (English).
 const timeAgo = new TimeAgo('en-US');
 
-function Comment(props) {
+interface IProps {
+    item: IItem,
+    rank: number,
+}
+
+function Comment(props: IProps) {
     const { item, rank } = props;
 
     return (
@@ -40,7 +47,7 @@ function Comment(props) {
     );
 }
 
-function Story(props) {
+function Story(props: IProps) {
     const { item, rank } = props;
 
     return (
@@ -96,7 +103,7 @@ function Story(props) {
 }
 
 
-function Item(props) {
+function Item(props: IProps) {
     const { item, rank } = props;
 
     if(item.type === "comment") {

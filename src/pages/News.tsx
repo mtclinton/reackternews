@@ -3,9 +3,17 @@ import React from 'react';
 import Container from '../components/Container';
 
 import getPageNumber from '../util/pageNumber';
+import {RouteComponentProps} from "react-router";
+
+interface RouteInfo {
+    page?: string,
+}
+
+interface IProps extends RouteComponentProps<RouteInfo> {
+}
 
 
-function News(props) {
+function News(props: IProps): JSX.Element {
     const { match } = props;
 
     return (

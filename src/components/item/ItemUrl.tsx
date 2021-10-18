@@ -2,13 +2,18 @@ import React from 'react';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 
+import { IItem } from '../../types';
 import extractHostname from '../../util/extractHostname';
 
+// @ts-ignore
 TimeAgo.addDefaultLocale(en);
 const psl = require('psl');
 
+interface IProps {
+    item: IItem,
+}
 
-function ItemUrl(props) {
+function ItemUrl(props: IProps) {
     const { item } = props;
 
     if (typeof item.url === 'undefined') {
